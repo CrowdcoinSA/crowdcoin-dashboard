@@ -1,0 +1,22 @@
+                            <a href="{% url 'tickets' %}">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="green">
+                                        <i class="material-icons">event</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3 class="title">Events Tickets</h3>
+                                        <p class="category">Buy tickets to events</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons text-danger">add_box</i>
+                                            <a href="{% url 'tickets-buy-ticket' %}">Buy Ticket</a>
+                                        </div>
+                                        <br/>
+                                        <div class="stats">
+                                            <i class="material-icons text-danger">add_box</i>
+                                            <a href="{% url 'tickets-verify-ticket' %}">Verify Ticket</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>

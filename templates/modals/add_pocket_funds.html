@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div class="modal fade" id="Add-Pocket-Funds-Modal" tabindex="0" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">How to top-up your account</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title" id="pocket-balance">Option 1 | Instant EFT & Bank Card</h4>
+                        <p class="category">Top up your pocket using PayFast</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="panel-body">
+                           <form method="post" action="/pay/redirect">
+                               {% csrf_token %}
+                                <div class="col-md-4">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label text-left">Amount</label>
+                                        <input type="text" class="form-control" name="amount">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-md-offset-2">
+                                    <button type="submit" class="btn btn-block" data-background-color= "orange"><i class="material-icons">send</i> Pay now</button>
+                                    <div class="clearfix"></div>
+                                </div>
+                               <input type="hidden" name="product" value="Crowdcoin Pocket Top-up"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p class="small">Please allow up to 48 working hours for your transaction to reflect.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+</script>

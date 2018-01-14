@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+	    <div class="main-panel">
+
+			<div class="content">
+				<div class="container-fluid">
+	                <div class="row">
+						<div class="col-md-4 col-sm-12 pull-right">
+							{% for message in messages%}
+								<div class="alert alert-dismissable alert-rose">{{message}}</div>
+							{% endfor %}							
+						</div>	                
+	                    <div class="col-md-8">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="orange">
+	                                <h4 class="title">Buy Voucher</h4>
+	                                <p class="category">Purchase a Crowdcoin Voucher.</p>
+	                            </div>
+	                            <div class="card-content">
+	                                <form method="POST" id='form-buy-voucher'>
+	                                {% csrf_token %}
+	                                        <div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Amount</label>
+													<input name='amount' id='Buy-Voucher-Amount' required="required" placeholder="50" type="Number" step="0.1" class="form-control">
+												</div>
+	                                        </div>
+	                                        <div class="col-md-6">
+												<div class="form-group ">
+													<label class="control-label">Cell No</label>
+													<input name='recipient_msisdn' id='Buy-Voucher-Recipient-Msisdn' required="required"  placeholder="0790345678"  type="tel" class="form-control msisdn" >
+												</div>
+	                                        </div>
+	                                        <input type="hidden" name="pocket_from" value="{{profile.default_pocket.resource_uri}}">
+	                                        <div class="col-md-12">
+	                                        	<button   type="submit" class="btn btn-warning" >Buy Voucher</button>
+						            		</div>
+	                                    <div class="clearfix"></div>
+	                                </form>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+
+			{% include 'footer.html' %}
+		</div>
+
+    </div>
+    {% include 'money-transfer/confirm-buy-voucher.html' %}
+{% endblock %}

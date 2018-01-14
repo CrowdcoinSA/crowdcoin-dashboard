@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+	    <div class="main-panel">
+
+			<div class="content">
+				<div class="container-fluid">
+	                <div class="row">
+						<div class="col-md-4 pull-right">
+							{% for message in messages%}
+								<div class="alert alert-dismissable alert-rose">{{message}}</div>
+							{% endfor %}
+						</div>	                
+	                    <div class="col-md-8">
+							<div class="card">
+							    <div class="card-header" data-background-color="orange">
+							        <h4 class="title" id="pocket-balance">Verify Voucher</h4>
+							        <p class="category">Validate your Crowdcoin Voucher.</p>
+							    </div>
+								<div class="card-content">
+								        <form>
+								            <div class="row">
+								                <div class="col-md-12">
+													<div class="form-group label-floating">
+														<label class="control-label">Voucher Number</label>
+														<input type="text" class="form-control" value="{{ user.first_name }}" >
+													</div>
+								                </div>
+								                <div class="col-md-12">
+								            		<button type="submit" class="btn btn-warning">Verify Voucher</button>
+								            	</div>
+								            <div class="clearfix"></div>
+								        </form>
+								    </div>
+
+							</div>	                      
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+
+			{% include 'footer.html' %}
+		</div>
+
+    </div>
+{% endblock %}

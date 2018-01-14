@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                    {% for message in messages%}
+                        <div class="col-md-11 col-md-offset-1 col-sm-12 ">
+                            <div class="alert alert-danger">
+                                <div class="container-fluid">
+                                  <div class="alert-icon">
+                                    <i class="material-icons">info_outline</i>
+                                  </div>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                  </button>
+                                    {{message}}
+                                </div>
+                            </div>
+                        </div> 
+                    {% endfor %}                     
+                        <div class="col-md-5 col-md-offset-1">
+                            <div class="card">
+                                <div class="card-header" data-background-color="orange">
+                                    <h4 class="title"><i class="material-icons">lock</i> Instant Transaction Notification</h4>
+                                </div>
+                                <div class="card-content">
+                                    <form method="POST" name="UpdateITNS">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="merchant_id" value="{{ merchant.id }}">
+                                    <input type="hidden" name="form_name" value="UpdateITNS">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Callback URL</label>
+                                                    <input type="url" name="callback_url" class="form-control" placeholder="http://mysite.com/payment/crowdcoin" value="{{ merchant.callback_url }}">
+                                                </div>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Callback Method</label>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="callback_method" value="POST" {% if merchant.callback_method == "POST" %} checked="true" {% endif %}>
+                                                            POST
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" value="GET" name="callback_method" {% if merchant.callback_method == "GET" %} checked="true" {% endif %} >
+                                                            GET
+                                                        </label>
+                                                    </div>   
+                                                </div>                                                 
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-warning pull-right">Update Profile</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <div class="card">
+                                <div class="card-header" data-background-color="orange">
+                                    <h4 class="title"><i class="material-icons">email</i> E-mail Notifications</h4>
+                                </div>
+                                <div class="card-content">
+                                    <form method="POST" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="merchant_id" value="{{ merchant.id }}">
+                                    <input type="hidden" name="form_name" value="UpdateEmail">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">E-mail</label>
+                                                    <input type="email" name="email_notification" class="form-control" value="{{ merchant.email_notification }}">
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-warning pull-right">Update Profile</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+{% endblock %}

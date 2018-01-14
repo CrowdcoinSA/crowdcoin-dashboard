@@ -1,0 +1,60 @@
+<!-- Modal -->
+<div class="modal fade" id="Create-Crowdcoin-Payment-Lead-Modal" tabindex="0" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Inter-account Transfer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title" id="pocket-balance">Transfer funds to another account</h4>
+                        <p class="category">Top up your pocket using PayFast</p>
+                    </div>
+                    <div class="content">
+                        <div class="card-content">
+                            <h class="card-title" id="create-crowdcoin-payment-lead-pocket-status"></h>
+                            <div class="col-md-12">
+                                <form id="create-crowdcoin-payment-lead-form">
+                                    <div class="row text-left">
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">From - Pocket Handle</label>
+                                                <p  class="form-control" id="create-crowdcoin-payment-lead-pocket-from" disabled></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">To - Pocket Handle</label>
+                                                <input type="text" class="form-control" onchange="" id="create-crowdcoin-payment-lead-pocket-to">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Amount</label>
+                                                <input type="number" class="form-control" id="create-crowdcoin-payment-lead-amount">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Reference</label>
+                                                <input type="text" class="form-control" id="create-crowdcoin-payment-lead-reference">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" onclick="submit_crowdcoin_payment_lead();" class="btn btn-warning btn-block text-center" id="create-crowdcoin-payment-lead-pocket-submit-btn">Confirm Payment</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+
+{% extends 'base.html' %}
+
+{% block title %} Login{% endblock %}
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+
+	    <div class="main-panel">
+			{% include "top-nav-bar.html" %}
+
+			<div class="content">
+				<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="card">
+	                            <div class="card-header" data-background-color="orange">
+	                                <h4 class="title">Confirm password reset</h4>
+									<p class="category">Secure your account with a new password.</p>
+	                            </div>
+								<div class="card-content">
+                                    {% if validlink %}
+                                    <form method="post" >
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                        <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+                                        <input type="password" class="form-control" name="{{ field.name }}" id="id_{{ field.name }}">
+                                       <p class="help-text">{% autoescape off %} {{ field.help_text }}{% endautoescape %} </p>
+
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <input type="submit" value="login" class="btn btn-warning pull-right" />
+                                    <input type="hidden" name="next" value="/" />
+                                    </form>
+                                    {% else %}
+                                        Invalid password reset link
+                                    {% endif %}
+								</div>
+								<div class="card-footer">
+									<div class="stats">
+										<i class="material-icons text-danger">warning</i> Unable to recover password? <a href="http://help.crowdcoin.co.za" target="_blank"> Get assistance</a>
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+				</div>
+			</div>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<nav class="pull-left">
+						<ul>
+							<li>
+								<a href="#">
+									Home
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									Company
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									Portfolio
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								   Blog
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<p class="copyright pull-right">
+						&copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+					</p>
+				</div>
+			</footer>
+		</div>
+
+    </div>
+{% endblock %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Link to the Bootstrap CSS from a CDN -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"
+          rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Password reset confirm</h3>
+      </div>
+       <div class="row" style="padding:20px;">
+          {% if validlink %}
+          <form role="form" action="" method="post">
+           {% csrf_token %}
+           {% if form.non_field_errors %}
+            <p class="error">
+              {% for error in form.non_field_errors %}
+		            {{ error }}
+		          {% endfor %}
+            </p>
+           {% endif %}
+           {% for field in form %}
+            <div class="form-group">
+		          {{ field.label_tag }}
+              {% if field.field.required %}
+              *
+              {% endif %}
+              <br/>
+		          {{ field }}
+		        {% if field.errors %}
+		          <p class="error">
+		          {% for error in field.errors %}
+		            {{ error }}
+		          {% endfor %}
+		          </p>
+		        {% endif %}
+            </div>
+          {% endfor %}
+    		<input type="submit" class="btn btn-default" value="Submit" />
+   	  </form>
+       {% else %}
+       Invalid password reset link
+       {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

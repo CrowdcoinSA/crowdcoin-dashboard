@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Log In {% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+   {% include "top-nav-bar.html" %}
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 ">
+                            {% if  form.errors %}
+                                <div class="alert alert-dismissable alert-rose">Your username and password didn't match. Please try again.</div>
+                            {% endif %}                            
+                        </div>     
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 ">
+                            {% for message in messages%}
+                                <div class="alert alert-dismissable alert-rose">{{message}}</div>
+                            {% endfor %}                            
+                        </div> 
+                        <div class="col-md-8 col-md-offset-2 ">
+                            <div class="card">
+                                    <div class="card-header" data-background-color="orange">
+                                        <h4 class="title">Merchant Login</h4>
+                                        <p class="category">Manage your Crowdcoin account.</p>
+                                    </div>
+                                    <div class="card-content">
+
+                                        <form method="post" >
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                            {% if field.name == 'password' %}
+                                            <label class="control-label" for="id_{{ field.name }}">{{ field.label }}: </label>
+                                            {% else %}
+                                            <label class="control-label" for="id_{{ field.name }}">Username: </label>
+                                            {% endif %}
+                                            <input {% if field.name == 'password' %} type="password"  class="form-control" {% else %} type="text"  class="form-control "{% endif %} name="{{ field.name }}" id="id_{{ field.name }}">
+                                            <p class="help-text">{{ field.help_text }} </p>
+
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <input type="submit" value="login" class="btn btn-warning"  /> 
+                                        
+                                        <input type="hidden" name="next" value="{{ next|default:'/' }}" />
+                                        </form>
+                                    </div>
+                                    <div class="card-footer">
+                                    
+                                        <div class="stats">
+                                            <i class="material-icons text-danger">person</i> <a href="/signup">Don't have an account? Request a Demo.</a>
+                                        </div>                                    
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+{% endblock %}

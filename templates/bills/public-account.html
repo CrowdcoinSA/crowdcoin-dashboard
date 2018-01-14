@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+	    <div class="main-panel">
+
+			<div class="content">
+				<div class="container-fluid">
+	                <div class="row">
+						<div class="col-md-10">
+							{% for message in messages%}
+								<div class="alert alert-dismissable alert-rose">{{message}}</div>
+							{% endfor %}
+						</div>	                
+	                    <div class="col-md-10">
+						    <div class="card">
+	                            <div class="card-header" data-background-color="red">
+	                                <h4 class="title">Public Account</h4>
+	                                <p class="category">Pay a registered 3rd party account.</p>
+	                            </div>
+	                            <div class="card-content">
+	                                <form method="post">
+	                                {% csrf_token %}
+	                                    <div class="row">									
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Recipient Insitution</label>
+	                                                <!-- country codes (ISO 3166) and Dial codes. -->
+	                                                <select id="pocket_to" name="pocket_to" class="form-control form-rose">
+	                                                {% for merchant in merchants %}
+	                                                    <option  value="{{merchant.default_pocket.resource_uri}}">{{merchant.trading_name}}</option>
+	                                                {% endfor %}}
+	                                                </select>
+	                                            </div>
+	                                        </div>	
+	                                        <div class="col-md-6">
+												<div class="form-group ">
+													<label class="control-label">Amount</label>
+													<input type="Number" required="required" step="0.1" name="amount" class="form-control">
+												</div>
+	                                        </div>
+	                                        <div class="col-md-6">
+												<div class="form-group ">
+													<label class="control-label">Account Number <small>(Required for Bank payment)</small></label>
+													<input type="text" class="form-control" name='account_no'>
+												</div>
+	                                        </div>  
+	                                        <div class="col-md-6">
+												<div class="form-group ">
+													<label class="control-label">Reference</label>
+													<input type="text" class="form-control" required="required" name='reference'>
+												</div>
+	                                        </div>  
+	                                        <div class="col-md-6">
+												<div class="form-group ">
+													<label class="control-label">Sender's Full names</label>
+													<input type="text" class="form-control" required="required" name='sender_name'>
+												</div>
+	                                        </div>  	                                        	                                        	                                        
+	                                        <div class="col-md-6">
+												<div class="form-group ">
+													<label class="control-label">Sender's Cell No</label>
+													<input type="tel" name="sender_msisdn" required="required" class="form-control" >
+												</div>
+	                                        </div>                                      
+	                                    </div>
+	                                    <input type="hidden" name="pocket_from" value="{{profile.default_pocket.resource_uri}}">
+	                                    <button type="submit" class="btn btn-danger">Pay Account</button>
+	                                    <div class="clearfix"></div>
+	                                </form>
+	                            </div>
+	                        </div>
+						</div>	 
+	                </div>
+	            </div>
+			</div>
+
+			{% include 'footer.html' %}
+		</div>
+
+    </div>
+{% endblock %}

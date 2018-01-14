@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                    	<div class="col-md-8 col-md-offset-2">
+                            <div class="card">
+                                <div class="card-header text-center" data-background-color="orange">
+                                    <h4 class="title">Merchant Subscription</h3>
+                                    <p class="category">Are you looking for more control? Please check our Premium Version of Crowdcoin Merchant.</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="table-responsive table-upgrade">
+                                        <table class="table">
+                                            <thead>
+                                                <th></th>
+                                            	<th class="text-center">Free</th>
+                                            	<th class="text-center">Premium</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                	<td>Monthly Limit</td>
+                                                	<td class="text-center">Unlimited</td>
+                                                	<td class="text-center">R50 000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cash-out Hold</td>
+                                                    <td class="text-center">14 Business Days</td>
+                                                    <td class="text-center">7 Business Days</td>
+                                                </tr>                                                
+                                                <tr>
+                                                    <td>Merchant Fee</td>
+                                                    <td class="text-center">50%</td>
+                                                    <td class="text-center">3.5%</td>
+                                                </tr>
+												<tr>
+                                                	<td>REST API Integration</td>
+        											<td class="text-center"><i class="fa fa-times text-danger"></i></td>
+                                                	<td class="text-center"><i class="fa fa-check text-success"></td>
+                                                </tr>
+        										<tr>
+                                                	<td>Premium Support</td>
+        											<td class="text-center"><i class="fa fa-times text-danger"></i></td>
+                                                	<td class="text-center"><i class="fa fa-check text-success"></td>
+                                                </tr>
+        										<tr>
+                                                	<td></td>
+        											<td class="text-center">Free</td>
+                                                	<td class="text-center">Just R850/m</td>
+                                                </tr>
+        										<tr>
+        											<td class="text-center"></td>
+        											<td class="text-center">
+        												<a href="#" class="btn btn-round btn-fill btn-warning disabled">Current Version</a>
+        											</td>
+        											<td class="text-center">
+                                                    <form method="post" action="/pay/redirect">
+                                                    <input type="hidden" name="product" value="Crowdcoin Premium Subscription - {{merchant.trading_name }}"/>
+                                                    <input type="hidden" name="amount" value="850"/>
+                                                    {% csrf_token %}
+        												<input type="submit" class="btn btn-round btn-fill btn-success" value="Upgrade to PRO"/>
+                                                    </form>
+        											</td>
+        										</tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+{% endblock %}

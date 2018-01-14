@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+	    <div class="main-panel">
+
+			<div class="content">
+				<div class="container-fluid">
+	                <div class="row">
+						<div class="col-md-4 col-sm-12 pull-right">
+							{% for message in messages%}
+								<div class="alert alert-dismissable alert-rose">{{message}}</div>
+							{% endfor %}
+						</div>	                
+	                    <div class="col-md-8">
+							<div class="card">
+							    <div class="card-header" data-background-color="orange">
+							        <h4 class="title" id="pocket-balance">Redeem Voucher</h4>
+							        <p class="category">Top up your pocket using a Crowdcoin Voucher.</p>
+							    </div>
+							    <div class="card-content">
+							        <form method="post">
+							        	{% csrf_token %}
+							            <div class="row">
+							                <div class="col-md-8">
+							                    <div class="form-group label-floating">
+							                        <label class="control-label">Voucher Number</label>
+							                        <input type="tel" class="form-control" name="voucher_code" >
+							                    </div>
+							                </div>
+							                <div class="col-md-4">
+							                    <div class="form-group label-floating">
+							                        <label class="control-label">PIN</label>
+							                        <input type="tel" class="form-control" name="security_pin" >
+							                    </div>
+							                </div>
+							                <input type="hidden" name="pocket_to" value="{{profile.default_pocket.resource_uri}}">
+							                <div class="col-md-12">
+						            		<button type="submit" class="btn btn-warning">Redeem Voucher</button>
+						            	</div>                                       
+							            </div>
+							            <div class="clearfix"></div>
+							        </form>
+							    </div>
+							</div>	                      
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+
+			{% include 'footer.html' %}
+		</div>
+
+    </div>
+{% endblock %}

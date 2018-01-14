@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">            
+                        <div class="col-md-12">
+                                <div class="card card-plain">
+                                    <div class="card-header" data-background-color="orange">
+                                        <h4 class="title" id="pocket-balance"> Vouchers History</h4>
+                                        <p class="category" id="pocket-name">Recent vouchers purchase from your account</p>    
+                                    </div>
+
+                                    <div class="card-content table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="text-warning">
+                                                <th>AMOUNT</th>
+                                                <th>VOUCHER CODE</th>
+                                                <th>SENDER</th>
+                                                <th>RECIPIENT</th>
+                                                <th>STATUS</th>                                                
+                                                <th>DATE</th>
+                                            </thead>
+                                            <tbody id="transactions-table" class="small">
+                                            {% for voucher in vouchers|dictsortreversed:"created" %}
+                                                <tr {% if voucher.status == 'Collected' %} class="danger" {% else %} class="success" {% endif %}  >
+                                                    <td>{{voucher.amount}}</td>
+                                                    <td>{{ voucher.voucher_code }}</td>
+                                                    <td>{{ voucher.sender_msisdn }} {{ voucher.sender_name }}</td>
+                                                    <td>{{ voucher.recipient_msisdn }} {{ voucher.recipient_name }}</td>
+                                                    <td>{{ voucher.status }}</td>
+                                                    <td class="datetime">{{ voucher.created  }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+    {% include 'modals/view_pocket_history.html' %}
+    {% include 'modals/view_pocket_information.html' %}
+    {% include 'modals/add_pocket_funds.html' %}
+    {% include 'modals/create_crowdcoin_payment_lead.html' %}    
+{% endblock %}

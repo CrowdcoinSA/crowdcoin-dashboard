@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} Merchant{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+
+	    <div class="main-panel">
+			{% include "top-nav-bar.html" %}
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+                        <div class="col-lg-6 col-lg-offset-3 ">
+                            <div class="card card-profile">
+    							<div class="card-avatar">
+    								<a href="/">
+    									<img class="img" src="/static/img/logo.png" width="250">
+    								</a>
+    							</div>
+
+    							<div class="content">
+    								<h6 class="category text-gray">Redirecting</h6>
+    								<h4 class="card-title">
+                                        You are being redirected to <strong>PayFast</strong> payment page.<br/> Click on the <strong class="text-warning">Proceed</strong> button below.
+                                    </h4>
+    								<p class="card-content">
+                                        <form action="{{ form.target }}" method="POST">
+                                            <p>{{ form.as_p }}</p>
+                                            <div class="col-md-6"><input type="button" class="btn btn-default btn-raised btn-block" value="Cancel"></div>
+                                            <div class="col-md-6"><input type="submit" class="btn btn-warning btn-raised btn-block" value="Proceed"></div>
+                                        </form>
+    								</p>
+    							</div>
+    						</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			{% include 'footer.html' %}
+		</div>
+
+    </div>
+{% endblock %}

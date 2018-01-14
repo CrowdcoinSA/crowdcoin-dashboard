@@ -1,0 +1,24 @@
+                            <a href="{% url 'money-transfer' %}">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="orange">
+                                        <i class="glyphicon glyphicon-transfer""></i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3 class="title">Crowdcoins Transfer</h3>
+                                        <p class="category">Send And Recieve Crowdcoin</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">                                            
+                                            <a href="{% url 'money-transfer-buy-voucher' %}" class="menu-card-link"><p class="material-icons ">add_box</p> Send Crowdcoins</a>
+                                        </div>
+                                        <br/>
+                                        <div class="stats">
+                                            <a href="{% url 'money-transfer-redeem-voucher' %}" class="menu-card-link"><p class="material-icons ">add_box</p> Recieve Crowdcoins</a>
+                                        </div>
+                                        <br/>
+                                        <div class="stats">
+                                            <a href="{% url 'money-transfer-voucher-history' %}" class="menu-card-link"><p class="material-icons ">add_box</p> Last 25 Vouchers </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>

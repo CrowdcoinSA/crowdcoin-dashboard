@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                    {% for message in messages%}
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 ">
+                            <div class="alert alert-danger">
+                                <div class="container-fluid">
+                                  <div class="alert-icon">
+                                    <i class="material-icons">info_outline</i>
+                                  </div>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                  </button>
+                                    {{message}}
+                                </div>
+                            </div>
+                        </div> 
+                    {% endfor %}                      
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="card">
+                                <div class="card-header" data-background-color="orange">
+                                    <h4 class="title">Profile</h4>
+                                </div>
+                                <div class="card-content">
+                                    <form method="POST" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="merchant_id" value="{{ merchant.id }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Username</label>
+                                                    <input type="text" class="form-control" value="{{ user.username }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Email address</label>
+                                                    <input type="email" class="form-control" value="{{ user.email }}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">First Name</label>
+                                                    <input type="text" class="form-control" value="{{ user.first_name }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Last Name</label>
+                                                    <input type="text" class="form-control" value="{{ user.last_name }}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Business Name</label>
+                                                    <input type="text" class="form-control" name="trading_name" value="{{ merchant.trading_name }}" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Business Description</label>
+                                                    <input type="text" class="form-control" name="description" value="{{ merchant.description }}" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Physical Adress</label>
+                                                    <textarea type="text" name="street_address" class="form-control" rows="2"  >{{ merchant.street_address }}</textarea> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">City</label>
+                                                    <input type="text" name="city" class="form-control" value="{{ merchant.city }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Province</label>
+                                                    <input type="text" name="province" class="form-control" value="{{ merchant.province }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Postal Code</label>
+                                                    <input type="text" name="postal_code" class="form-control" value="{{ merchant.postal_code }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Website</label>
+                                                    <input type="text" name="website" class="form-control" value="{{ merchant.website }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Support Telephone</label>
+                                                    <input type="text" name="telephone" class="form-control" value="{{ merchant.telephone }}" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Support Email</label>
+                                                    <input type="text" name="email" class="form-control" value="{{ merchant.email }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-warning pull-right">Update Profile</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+{% endblock %}

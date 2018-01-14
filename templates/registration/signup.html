@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+   {% include "top-nav-bar.html" %}
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 ">
+                            {% for message in messages%}
+                                <div class="alert alert-dismissable alert-rose">{{message}}</div>
+                            {% endfor %}                            
+                        </div>  
+                        <div class="col-md-8 col-md-offset-2 ">
+                            <div class="alert">
+                                <div class="card-header" data-background-color="orange">
+                                    <h2 class="title">Request A Crowdcoin Merchant Demo</h2>
+                                    <p class="category">Please fill in this form and we will be in touch shortly to help you get started.</[>
+                                </div>
+                                <hr/><br/>
+                                <div class="card-content">
+                                    <form method="post">
+                                    {% csrf_token %}
+                                    <div>
+                                        <h5 class=" text-warning">Profile Details</h5>
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group ">
+                                                    <label class="control-label">First name </label>
+                                                    <input type="text" maxlength="30" required="required"  placeholder="Georginah"  class="form-control" name="first_name" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group ">
+                                                    <label class="control-label">Surname</label>
+                                                    <input type="text" maxlength="30" required="required"  placeholder="Khumalo"  class="form-control" name="last_name" >
+                                                </div>
+                                            </div>                                        
+                                        </div>                                    
+                                        <div class="row">                                       
+                                            <div class="col-md-3">
+                                                <div class="form-group ">
+                                                    <label class="control-label text-rose">Mobile no.</label>
+                                                    <input required="required" maxlength="15" placeholder="0812345678" name='msisdn' type="tel" class="form-control form-control-inverse">
+                                                </div>
+                                            </div>                                       
+                                            <div class="col-md-3">
+                                                <div class="form-group ">
+                                                    <label class="control-label text-rose">Email address </label>
+                                                    <input  placeholder="Georginah@gmail.com" name='email' type="email" required="required" class="form-control form-control-inverse ">
+                                                </div>
+                                            </div> 
+                                            <div class="col-md-3">
+                                                <div class="form-group ">
+                                                    <label class="control-label">Password</label>
+                                                    <input required="required" maxlength="15" placeholder="*******" name='password' type="password" class="form-control form-control-inverse">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group ">
+                                                    <label class="control-label">Password again</label>
+                                                    <input required="required" maxlength="15"  name='password_again' placeholder="*******"  type="password" class="form-control form-control-inverse">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div><h5 class=" text-warning">Business Information</h5></div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group ">
+                                                    <label class="control-label">Name</label>
+                                                    <input required="required" maxlength="20" placeholder="Georginah's Kota Place"   name='business_name' type="text" class="form-control form-control-inverse">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group ">
+                                                    <label class="control-label">Description</label>
+                                                    <input required="required" maxlength="250" placeholder="Local fast foods and beverages store"   name='business_description' type="text" class="form-control form-control-inverse">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group ">
+                                                    <label class="control-label">Tel no.</label>
+                                                    <input required="required" maxlength="20" placeholder="0113453212"   name='business_tel' type="tel" class="form-control form-control-inverse">
+                                                </div>
+                                            </div>                                            
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group ">
+                                                <div class="checkbox">
+                                                    <p class="text-warning">By continuing you agree to have read and agree to be bound by Crowdcoin's <a target="_blank" href="//help.crowdcoin.co.za/search?q=terms" target="_tab">terms and conditions.</a></p>
+
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                                <button type="submit" class="btn btn-warning">Submit Registration</button>
+                                            </div>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+{% endblock %}

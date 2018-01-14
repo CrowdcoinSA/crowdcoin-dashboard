@@ -1,0 +1,17 @@
+                            <a href="{% url 'bills' %}">
+                                <div class="card card-stats" >
+                                    <div class="card-header" data-background-color="orange">
+                                        <i class="material-icons">group</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3 class="title">Payments</h3>
+                                        <p class="category">3rd Party Payments</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <a href="{% url 'bills-public-account' %}" class="menu-card-link"><p class="material-icons">add_box</p> Pay Merchant</a><br/>
+                                            <a href="{% url 'bills-bank-transfer' %}" class="menu-card-link"><p class="material-icons">add_box</p> Request Payout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>

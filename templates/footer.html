@@ -1,0 +1,49 @@
+
+{% block footer %}
+
+ <footer class="footer">
+				<div class="container-fluid">
+					<nav class="pull-left">
+						<ul>
+							<li>
+								<a href="/">
+									Home 
+								</a>
+							</li>
+{% if not user.is_authenticated %}							
+							<li>
+								<a href="/signup">
+									Request Demo
+								</a>
+							</li>
+							<li>
+								<a href="/login">
+									Sign In
+								</a>
+							</li>							
+{% else %}							
+							<li>
+								<a href="/logout">
+									Sign Out
+								</a>
+							</li>
+{% endif %}													
+							<li>
+								<a href="http://www.crowdcoin.co.za" target="_blank">
+									Company
+								</a>
+							</li>
+							<li>
+								<a href="http://help.crowdcoin.co.za" target="_blank">
+									Support & FAQ
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<p class="copyright pull-right">
+						&copy; <script>document.write(new Date().getFullYear())</script> Crowdcoin
+					</p>
+				</div>
+			</footer>
+
+{% endblock %}

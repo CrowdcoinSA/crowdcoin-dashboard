@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load hijack_tags %}
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+    
+        <div class="main-panel">
+
+            <div class="content">
+            {% hijack_notification %}
+                <div class="container-fluid">              
+                    <div class="row">
+                        {% if merchant.subscription == 'Trial' %}                        
+                         <div class="col-md-8">
+                             <div class="alert alert-inverse alert-dismissable ">
+                                <h3 class='text'>Welcome to your Crowdcoin Merchant Account</h3>
+                                <p class="alert-body">
+                                    Thank you for choosing Crowdcoin as your Airtime Payments partner. You are now ready to accept airtime payments.
+                                    <br/><br/>
+                             
+                                    <strong>Just A Quick Reminder</strong>:
+                                    <br/>
+                                    <ul>
+                                        <li>Verify Business Details:
+                                        <ol>
+                                            <li>Ensure that your business <a href="{% url 'account-profile' %}" ><strong class="text-warning">Profile</strong></a> details are correct.</li>
+                                        </ol>
+                                        </li>
+
+                                        <li>Start Accepting Airtime:
+                                            <ol>
+                                                <li><strong>Web</strong>: Navigate to <a href="http://www.crowdcoin.co.za" target="_tab" >www.crowdcoin.co.za</a> and select Pay Merchant.</li>
+                                            </ol>
+                                        </li>
+
+                                        <li>Integrate with E-commerce:
+                                            <ol>
+                                                <li><strong>Integrate</strong>: Please see our <a  href="{% url 'account-integration' %}"><strong class="text-warning">API Integration documentation</strong></a></li>
+                                            </ol>
+                                        </li>
+                                    </ul>
+                                    <br/>
+                                     <br/> <a class="btn btn-warning" href="{% url 'account-subscription' %}"><i class="material-icons">unarchive</i> Upgrade to PRO</a>
+                                      <a class="btn btn-success" onclick="introJs().start();" href="#"><i class="material-icons">slideshow</i> Begin Tour</a>
+                                    <br/><br/>
+                                </p>
+                                <br/><br/>
+                            </div>                             
+                         </div>  
+                         <div class="col-md-4 ">
+                            {% include 'account/menu-card.html' %}    
+                        </div>                                               
+                        {% else %}
+                         <div class="col-md-4 col-sm-12">
+                            {% include 'account/menu-card.html' %}    
+                        </div>      
+                        <div class="col-md-4 col-md-offset-4 col-sm-6">
+                            {% include 'bills/menu-card.html' %}  
+                        </div>
+                        {% comment %}
+                        <div class="col-md-4 col-sm-6">
+                            {% include 'money-transfer/menu-card.html' %}    
+                        </div>                        
+                        <div class="col-md-4">
+                            {% include 'tickets/menu-card.html' %}  
+                        </div>
+                        {% endcomment %}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+    {% include 'modals/view_pocket_history.html' %}
+    {% include 'modals/view_pocket_information.html' %}
+    {% include 'modals/add_pocket_funds.html' %}
+    {% include 'modals/create_crowdcoin_payment_lead.html' %}    
+{% endblock %}

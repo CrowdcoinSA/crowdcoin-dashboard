@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="alert alert-rose" >
+                                    <p class="text-center h3 text-warning">{{ promotion.code }} </p>
+                                    <p class="text-center ">Your unique Promo code</p>                                     
+                                    <p class="card-content">
+                                       <br/>
+                                        <div class="text-center"> Hello {{ user.get_short_name | capfirst }}!<br/>Do you need further assistance?<br/>
+                                        </div>
+                                    </p>                                   
+                            </div>
+                        </div>                    
+                    </div>
+
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+    {% include 'modals/view_pocket_history.html' %}
+    {% include 'modals/view_pocket_information.html' %}
+    {% include 'modals/add_pocket_funds.html' %}
+    {% include 'modals/create_crowdcoin_payment_lead.html' %}    
+{% endblock %}

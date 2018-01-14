@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-header" data-background-color="orange">
+                                    <h4 class="title" id="pocket-balance">Transfer funds to another account</h4>
+                                    <p class="category">Top up your pocket using PayFast</p>
+                                </div>
+                                <div class="content">
+                                    <div class="card-content">
+                                        <h class="card-title" id="create-crowdcoin-payment-lead-pocket-status"></h>
+                                        <div class="col-md-12">
+                                            <form id="create-crowdcoin-payment-lead-form">
+                                                <div class="row text-left">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Crowdcoin Account Handle</label>
+                                                            <input type="text" class="form-control" onchange="" id="create-crowdcoin-payment-lead-pocket-to">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Amount</label>
+                                                            <input type="number" class="form-control" id="create-crowdcoin-payment-lead-amount">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Reference</label>
+                                                            <input type="text" class="form-control" id="create-crowdcoin-payment-lead-reference">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" onclick="submit_crowdcoin_payment_lead();" class="btn btn-warning btn-block text-center" id="create-crowdcoin-payment-lead-pocket-submit-btn">Confirm Payment</button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+    {% include 'modals/view_pocket_history.html' %}
+    {% include 'modals/view_pocket_information.html' %}
+    {% include 'modals/add_pocket_funds.html' %}
+    {% include 'modals/create_crowdcoin_payment_lead.html' %}    
+{% endblock %}

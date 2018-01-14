@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+    {% include "top-nav-bar.html" %}
+
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">    
+                             
+                        <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="orange">
+                                        <h4 class="title" id="pocket-balance"> Payments History</h4>
+                                        <p class="category" id="pocket-name">Recent payments made into and out of your account</p>    
+                                    </div>
+
+                                    <div class="card-content table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="text-warning">
+                                                <th>AMOUNT</th>
+                                                <th>DESCRIPTION</th>
+                                                <th>DATE</th>
+                                            </thead>
+                                            <tbody id="transactions-table" class="small">
+                                            {% for transaction in transactions|dictsortreversed:"datetime" %}
+                                                <tr {% if transaction.debit %} class="danger" {% else %} class="success" {% endif %} >
+                                                    <td>{{transaction.debit|yesno:"-,+" }}{{transaction.amount}}</td>
+                                                    <td>{% for description in transaction.description %} {{ description }}  {% endfor %}</td>
+                                                    <td class="datetime">{{ transaction.datetime  }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                        <div class="card-footer text-center">
+                            <span class="step-links">
+                            {% if transactions.has_previous %}
+                            <a class="btn btn-warning" href="?page={{ transactions.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                            Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}
+                            </span>
+                            {% if transactions.has_next %}
+                            <a class="btn btn-warning" href="?page={{ transactions.next_page_number }}">next</a>
+                            {% endif %}
+                            </span>
+                        </div>   
+                                </div>
+                            </div>                            
+                    </div>
+
+                </div>
+            </div>
+
+            {% include 'footer.html' %}
+        </div>
+
+    </div>
+    {% include 'modals/view_pocket_history.html' %}
+    {% include 'modals/view_pocket_information.html' %}
+    {% include 'modals/add_pocket_funds.html' %}
+    {% include 'modals/create_crowdcoin_payment_lead.html' %}    
+{% endblock %}

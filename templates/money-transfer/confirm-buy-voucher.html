@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div class="modal fade" id="Confirm-Buy-Voucher-Modal" tabindex="0" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="orange">
+                        <h4 class="title" id="pocket-balance">Crowdcoin Voucher</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="panel-body">
+                          <p class="">Please verify your transaction details.<br/><br/>
+                            Amount: R<span id='Confirm-Buy-Voucher-Modal-Amount'> Amount</span><br/>
+                            Fee: R<span id='Confirm-Buy-Voucher-Modal-Fee'> 10</span><br/>
+                            Merchant Commission: R<span id='Confirm-Buy-Voucher-Modal-Commission'> 5</span><br/>
+                            <h4>Total: R <span id='Confirm-Buy-Voucher-Modal-Total'> </span></h4>
+                            <br/>
+                            Crowdcoin will send the following SMSs :<br/><br/>
+                            Voucher Code + PIN to: <span id='Confirm-Buy-Voucher-Modal-Sender-Msisdn'> MSISDN</span><br/>
+                            Voucher Code Only to: <span id='Confirm-Buy-Voucher-Modal-Recipient-Msisdn'> MSISDN</span>
+                            <br/>
+                          </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-default col-md-5 col-xs-12" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="submit" onclick="$('#form-buy-voucher').submit();" class="btn btn-warning col-md-5 col-xs-12 pull-right">Send Voucher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+
+{% block side-bar %}
+
+<div class="sidebar" data-color="orange" data-image="/static/img/sidebar-1.jpg"  data-intro='Reveal more functionalities.' data-step='2'>
+    <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+        {% if user.is_authenticated %}
+            <li {% if request.session.active_side_pane == 'Overview' %}class="active"{% endif %}>
+                <a href="/">
+                    <i class="material-icons">home</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>         
+            <li {% if request.session.active_side_pane == 'Add funds' %}class="active"{% endif %}>
+                <a href="{% url 'account-add-funds'%}">
+                    <i class="material-icons">account_balance_wallet</i>
+                    <p>Add Funds</p>
+                </a>
+            </li>           
+            <li {% if request.session.active_side_pane == 'Statement' %}class="active"{% endif %}>
+                <a href="{% url 'account-statement' %}">
+                    <i class="material-icons">history</i>
+                    <p>Statement</p>
+                </a>
+            </li>                         
+            <li {% if request.session.active_side_pane == 'Payments' %}class="active"{% endif %}>
+                <a href="{% url 'bills'%}">
+                    <i class="material-icons">list</i>
+                    <p>Payments</p>
+                </a>
+            </li>               
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="material-icons">person</i>
+                    <p>Account <b class="caret"></b></p>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'account-profile' %}">Profile</a></li>
+                    <li><a href="{% url 'account-notification' %}">Notification</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'account-integration' %}">Integration</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'account-security' %}">Security</a></li>
+                </ul>
+            </li>  
+             
+            <li {% if request.session.active_side_pane == 'Subscription' %}class="active"{% endif %}>
+                        <a href="{% url 'account-subscription' %}">
+                            <i class="material-icons">unarchive</i>
+                            {% if merchant.subscription == 'Trial' %}
+                            <p>Upgrade to PRO</p>
+                            {% else %}
+                            <p>Subscription</p>
+                            {% endif %}   
+                        </a>
+             </li>            
+            <li>
+                <a href="/logout/">
+                   <i class="text-danger material-icons">power_settings_new</i>
+                   <span class="">Logout  </span>
+                </a>
+            </li>            
+
+            {% comment %}
+            <li {% if request.session.active_side_pane == 'Money Transfer' %}class="active"{% endif %}>
+                <a href="{% url 'money-transfer'%}">
+                    <i class="glyphicon glyphicon-transfer"></i>
+                    <p>Vouchers</p>
+                </a>
+            </li>     
+            <li {% if request.session.active_side_pane == 'Promotions' %}class="active"{% endif %}>
+                <a href="{% url 'promotions' %}">
+                    <i class="material-icons">share</i>
+                    <p>Promotions</p>
+                </a>
+            </li>                       
+            <li {% if request.session.active_side_pane == 'Events Tickets' %}class="active"{% endif %}>
+                <a href="{% url 'tickets'%}">
+                    <i class="material-icons">event</i>
+                    <p>Events Tickets</p>
+                </a>
+            </li>          
+            <li {% if request.session.active_side_pane == 'Transfer funds' %}class="active"{% endif %}>
+                <a href="{% url 'account-transfer' %}">
+                    <i class="material-icons">share</i>
+                    <p>Transfer Funds</p>
+                </a>
+            </li>   
+            {% endcomment %}  
+
+              
+        {% else %}
+            <li {% if active_side_pane == 'Sign up' %}class="active"{% endif %}>
+                <a href="/signup" >
+                    <i class="material-icons">keyboard</i>
+                    <p>Request Demo Access</p>
+                </a>
+            </li>
+            <li {% if active_side_pane != 'Sign up' %}class="active"{% endif %}>
+                <a href="/login" >
+                    <i class="material-icons">person</i>
+                    <p>Sign in</p>
+                </a>
+            </li>            
+        {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

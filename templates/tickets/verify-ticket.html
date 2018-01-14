@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+    {% include "side-bar.html" %}
+
+	    <div class="main-panel">
+			{% include "top-nav-bar.html" %}
+
+			<div class="content">
+				<div class="container-fluid">
+	                <div class="row">
+						<div class="col-md-4 pull-right">
+							{% for message in messages%}
+								<div class="alert alert-dismissable alert-rose">{{message}}</div>
+							{% endfor %}
+						</div>	                
+	                    <div class="col-md-8">
+						    <div class="card">
+	                            <div class="card-header" data-background-color="green">
+	                                <h4 class="title">Verify Ticket</h4>
+	                                <p class="category">Confirm ticket details.</p>
+	                            </div>
+	                            <div class="card-content">
+	                                <form>
+	                                    <div class="row">									
+	                                        <div class="col-md-12">
+												<div class="form-group label-floating">
+													<label class="control-label">Ticket ID</label>
+													<input type="text" class="form-control">
+												</div>
+	                                        </div>
+	                                        <div class="col-md-12">
+	                                    		<button type="submit" class="btn btn-success">Get Ticket Information</button>
+	                                    	</div>
+	                                    <div class="clearfix"></div>
+	                                </form>
+	                            </div>
+	                        </div>
+						</div>	 
+	                </div>
+	            </div>
+			</div>
+
+			{% include 'footer.html' %}
+		</div>
+
+    </div>
+{% endblock %}
