@@ -32,7 +32,7 @@ Logentries==0.15
 lxml==3.6.4
 packaging==16.8
 Pillow==2.9.0
-psycopg2==2.6.2
+psycopg2==2.7.3
 pyasn1==0.1.9
 pycparser==2.14
 pyparsing==2.2.0
