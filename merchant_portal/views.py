@@ -138,10 +138,11 @@ class BuyVoucherView(LoginRequiredMixin,View):
         data = {}
         data['pocket_from'] = request.POST.get('pocket_from')
         data['amount'] = request.POST.get('amount')
-        data['recipient_name'] = request.POST.get('recipient_name')
-        data['sender_name'] = request.POST.get('sender_name')
+        # data['recipient_name'] = request.POST.get('recipient_name')
+        # data['sender_name'] = request.POST.get('sender_name')
         data['recipient_msisdn'] = request.POST.get('recipient_msisdn','0')
-        data['sender_msisdn'] = request.POST.get('sender_msisdn','0')
+        # data['sender_msisdn'] = request.POST.get('sender_msisdn','0')
+        data['status'] = "Awaiting Collection"
 
         api_response = crowdcoin_api.post(
             settings.CROWDCOIN_API_URL+'voucher_payments/',
@@ -184,7 +185,7 @@ class RedeemVoucherView(LoginRequiredMixin,View):
         profile = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'profile/').json()
         context['profile'] = profile
 
-        api_response = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'voucher_payments/?voucher_code={voucher_code}&security_pin={security_pin}'.format(voucher_code=request.POST.get('voucher_code'),security_pin=request.POST.get('security_pin'))).json()
+        api_response = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'voucher_payments/?voucher_code={voucher_code}'.format(voucher_code=request.POST.get('voucher_code'))).json()
         logger.info(api_response)
         if api_response['meta']['total_count'] == 1:
             voucher = api_response['objects'][0]
@@ -459,7 +460,7 @@ class VoucherHistoryView(LoginRequiredMixin,View):
         crowdcoin_api = api_session(request)
         profile = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'profile/').json()
         context['profile'] = profile
-        context['vouchers'] = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'voucher_payments/?pocket_from={pocket}'.format(pocket=profile['default_pocket']['id'])).json()['objects']
+        context['vouchers'] = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'voucher_payments/?pocket_from={pocket}&order_by=-created'.format(pocket=profile['default_pocket']['id'])).json()['objects']
         request.session['active_side_pane'] = 'Money Transfer'
         return render(request, self.template_name, context)
 

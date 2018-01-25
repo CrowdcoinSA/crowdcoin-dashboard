@@ -51,7 +51,8 @@ class RemoteBackend(ModelBackend):
 def api_session(request):
 	try:
 		api_session = requests.Session()
-		api_session.headers = {'Authorization':'apikey {username}:{api_key}'.format(username=request.user.username,api_key=UserProfile.objects.get(user=request.user).api_key)}
+		api_session.headers = {'Authorization':'ApiKey {username}:{api_key}'.format(username=request.user.username,api_key=UserProfile.objects.get(user=request.user).api_key)}
+		logger.debug(api_session.headers)
 		return api_session
 	except Exception as e:
 		return None

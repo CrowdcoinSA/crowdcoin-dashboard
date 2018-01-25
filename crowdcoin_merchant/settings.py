@@ -27,7 +27,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG',False))
 
 CROWDCOIN_ENV = os.environ.get('CROWDCOIN_ENV','DEVELOPMENT')
 
-ALLOWED_HOSTS = ['dashboard.crowdcoin.co.za','0.0.0.0']
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',') if os.environ.get('DJANGO_ALLOWED_HOSTS') else ['*']
 
 #Crowdcoin API
 CROWDCOIN_API_URL  = os.environ.get('CROWDCOIN_API_URL','https://live.crowdcoin.co.za/api/v1/')

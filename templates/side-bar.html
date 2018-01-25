@@ -23,7 +23,13 @@
                     <i class="material-icons">account_balance_wallet</i>
                     <p>Add Funds</p>
                 </a>
-            </li>           
+            </li>       
+            <li {% if request.session.active_side_pane == 'Money Transfer' %}class="active"{% endif %}>
+                <a href="{% url 'money-transfer'%}">
+                    <i class="glyphicon glyphicon-transfer"></i>
+                    <p>Vouchers</p>
+                </a>
+            </li>                    
             <li {% if request.session.active_side_pane == 'Statement' %}class="active"{% endif %}>
                 <a href="{% url 'account-statement' %}">
                     <i class="material-icons">history</i>
@@ -68,13 +74,7 @@
                 </a>
             </li>            
 
-            {% comment %}
-            <li {% if request.session.active_side_pane == 'Money Transfer' %}class="active"{% endif %}>
-                <a href="{% url 'money-transfer'%}">
-                    <i class="glyphicon glyphicon-transfer"></i>
-                    <p>Vouchers</p>
-                </a>
-            </li>     
+            {% comment %} 
             <li {% if request.session.active_side_pane == 'Promotions' %}class="active"{% endif %}>
                 <a href="{% url 'promotions' %}">
                     <i class="material-icons">share</i>

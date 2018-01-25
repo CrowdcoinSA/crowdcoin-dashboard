@@ -30,12 +30,6 @@
                                         </ol>
                                         </li>
 
-                                        <li>Start Accepting Airtime:
-                                            <ol>
-                                                <li><strong>Web</strong>: Navigate to <a href="http://www.crowdcoin.co.za" target="_tab" >www.crowdcoin.co.za</a> and select Pay Merchant.</li>
-                                            </ol>
-                                        </li>
-
                                         <li>Integrate with E-commerce:
                                             <ol>
                                                 <li><strong>Integrate</strong>: Please see our <a  href="{% url 'account-integration' %}"><strong class="text-warning">API Integration documentation</strong></a></li>
@@ -52,14 +46,17 @@
                          </div>  
                          <div class="col-md-4 ">
                             {% include 'account/menu-card.html' %}    
-                        </div>                                               
+                        </div>                                        
+                        <div class="col-md-4 col-sm-6">
+                            {% include 'money-transfer/menu-card.html' %}    
+                        </div>                                       
                         {% else %}
                          <div class="col-md-4 col-sm-12">
                             {% include 'account/menu-card.html' %}    
                         </div>      
-                        <div class="col-md-4 col-md-offset-4 col-sm-6">
-                            {% include 'bills/menu-card.html' %}  
-                        </div>
+                        <div class="col-md-4  col-sm-6">
+                            {% include 'money-transfer/menu-card.html' %}    
+                        </div>                                
                         {% comment %}
                         <div class="col-md-4 col-sm-6">
                             {% include 'money-transfer/menu-card.html' %}    
