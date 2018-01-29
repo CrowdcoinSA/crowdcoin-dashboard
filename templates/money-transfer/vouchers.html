@@ -1,0 +1,25 @@
+
+                                    <div class=" table">
+                                        <table class="table table-hover">
+                                            <thead class="text-warning">
+                                                <th>ID</th>
+                                                <th>AMOUNT</th>
+                                                <th>VOUCHER CODE</th>
+                                                <th>RECIPIENT</th>
+                                                <th>STATUS</th>                                                
+                                                <th>DATE</th>
+                                            </thead>
+                                            <tbody id="transactions-table" class="small">
+                                            {% for voucher in vouchers|dictsortreversed:"created" %}
+                                                <tr {% if voucher.status == 'Collected' %} class="success" {% else %} class="" {% endif %}  >
+                                                    <td>#{{voucher.id}}</td>
+                                                    <td>{{voucher.amount}}</td>
+                                                    <td>{{ voucher.voucher_code }} {{ voucher.voucher_pin }}</td>
+                                                    <td>{{ voucher.recipient_msisdn }}</td>
+                                                    <td>{{ voucher.status }}</td>
+                                                    <td class="datetime">{{ voucher.created  }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>

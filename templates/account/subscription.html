@@ -24,27 +24,32 @@
                                         <table class="table">
                                             <thead>
                                                 <th></th>
-                                            	<th class="text-center">Free</th>
-                                            	<th class="text-center">Premium</th>
+                                            	<th class="text-center">Community</th>
+                                            	<th class="text-center">Enterprise</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                	<td>Monthly Limit</td>
-                                                	<td class="text-center">Unlimited</td>
-                                                	<td class="text-center">R50 000</td>
+                                                	<td>Cash Payout Limit</td>
+                                                    <td class="text-center">R {{ profile.default_pocket.payout_monthly_limit }}<br/><small>Per Month</small></td>
+                                                	<td class="text-center">Structured</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Cash-out Hold</td>
-                                                    <td class="text-center">14 Business Days</td>
-                                                    <td class="text-center">7 Business Days</td>
+                                                    <td>Cash Payout Hold</td>
+                                                    <td class="text-center">{{ profile.default_pocket.payout_hold_days }}<br/><small>Business Days</small></td>
+                                                    <td class="text-center">48 Hours</td>
                                                 </tr>                                                
                                                 <tr>
-                                                    <td>Merchant Fee</td>
-                                                    <td class="text-center">50%</td>
-                                                    <td class="text-center">3.5%</td>
+                                                    <td>Voucher Redeem Commission </td>
+                                                    <td class="text-center">{{ profile.default_pocket.voucher_receiving_fee }}</td>
+                                                    <td class="text-center">Tailored</td>
+                                                </tr>                                                
+                                                <tr>
+                                                    <td>Voucher Sale Fee </td>
+                                                    <td class="text-center">{{ profile.default_pocket.voucher_sending_fee }}</td>
+                                                    <td class="text-center">Tailored</td>
                                                 </tr>
 												<tr>
-                                                	<td>REST API Integration</td>
+                                                	<td>Custom Integration</td>
         											<td class="text-center"><i class="fa fa-times text-danger"></i></td>
                                                 	<td class="text-center"><i class="fa fa-check text-success"></td>
                                                 </tr>
@@ -56,7 +61,7 @@
         										<tr>
                                                 	<td></td>
         											<td class="text-center">Free</td>
-                                                	<td class="text-center">Just R850/m</td>
+                                                	<td class="text-center">Get in touch</td>
                                                 </tr>
         										<tr>
         											<td class="text-center"></td>
@@ -68,7 +73,8 @@
                                                     <input type="hidden" name="product" value="Crowdcoin Premium Subscription - {{merchant.trading_name }}"/>
                                                     <input type="hidden" name="amount" value="850"/>
                                                     {% csrf_token %}
-        												<input type="submit" class="btn btn-round btn-fill btn-success" value="Upgrade to PRO"/>
+        												<!-- <input type="submit" class="btn btn-round btn-fill btn-success" value="Upgrade to PRO"/> -->
+                                                        <a href="http://help.crowdcoin.co.za/contact" class="btn btn-round btn-fill btn-success" value="Upgrade to Enterprise">Upgrade to Enterprise</a>
                                                     </form>
         											</td>
         										</tr>

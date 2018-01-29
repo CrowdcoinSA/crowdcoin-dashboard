@@ -449,7 +449,7 @@ h2.title {
 .sidebar,
 .off-canvas-sidebar {
   position: absolute;
-  top: 15%;
+  top: 60px;
   bottom: 0;
   left: 0;
   z-index: 1;
@@ -5097,7 +5097,6 @@ footer .btn {
   box-sizing: border-box;
   color: rgb(36, 36, 36);
   font-family: "Roboto","Helvetica","Arial",sans-serif;
-  font-size: 18px;
   font-weight: 500;
   line-height: 30px;
 }

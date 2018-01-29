@@ -11,7 +11,7 @@
 	<link rel="icon" type="image/png" href="/static/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Crowdcoin Merchant | {% block title %} {% endblock %}</title>
+	<title> {{ merchant.trading_name|default_if_none:user.get_full_name }} | {% block title %} {% endblock %}</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />

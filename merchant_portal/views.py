@@ -57,6 +57,11 @@ class MoneyTransferView(LoginRequiredMixin,View):
         context ={}
         #context['form'] = ProfileForm
         #context['profile'] = Profile.objects.get(user=request.user)
+        crowdcoin_api = api_session(request)
+        profile = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'profile/').json()
+        logger.info(profile)
+        context['profile'] = profile
+        context['vouchers'] = crowdcoin_api.get(settings.CROWDCOIN_API_URL+'voucher_payments/?pocket_from={pocket}&order_by=-created'.format(pocket=profile['default_pocket']['id'])).json()['objects']
         request.session['active_side_pane'] = 'Money Transfer'
         return render(request, self.template_name, context)
 

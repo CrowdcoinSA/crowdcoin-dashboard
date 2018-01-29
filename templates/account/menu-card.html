@@ -1,21 +1,23 @@
-                            <div class="alert alert-default" >
-                                    <p class="text-center h3 text-warning"> R {{ profile.default_pocket.balance }} </p>
-                                    <p class="text-center ">Available balance</p>
-                                    <br/>
-                                    <div class="card-content">
-                                        <p class="text-center"  data-intro='Your account details' data-step='1'>
-											Public Name: <strong>{{ merchant.trading_name }}</strong><br/>
-											Pocket: <strong>{{ merchant.default_pocket.tag }}</strong><br/>
-                                        </p>
-                                    </div>
-                                <div class="card-footer">
-                                        <div class="stats">
-                                            <a href="{% url 'account-add-funds' %}" class="menu-card-link" ><i class="material-icons">add_box</i> Add Funds</a>
-                                        </div>
-                                        
-                                        <div class="stats">
-                                            <a href="{% url 'account-statement' %}" class="menu-card-link" ><i class="material-icons">add_box</i> View Statement</a>
-                                        </div>
-                                </div>                                    
-                            </div>
 
+                            <a href="{% url 'money-transfer' %}">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="green">
+                                        <i class="glyphicon glyphicon-user""></i>{{ merchant.default_pocket.tag }} <br/>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3 class="title"></h3>
+                                        <p class="category">
+                                            <strong class="text-success">{{ profile.default_pocket.balance }}</strong><br/><small>Available balance</small><br/> </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">                                            
+                                            <a href="{% url 'account-add-funds' %}" class="menu-card-link"><p class="material-icons ">add_box</p>  Buy Crowdcoins</a>
+                                        </div>
+                                        <br/>
+                                        <div class="stats">
+                                            <a href="{% url 'account-statement' %}" class="menu-card-link"><p class="material-icons ">add_box</p> Statement</a>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </a>
