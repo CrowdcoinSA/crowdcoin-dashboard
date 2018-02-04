@@ -250,6 +250,7 @@ class PublicAccountView(LoginRequiredMixin,View):
             sender_name=data.get('sender_name'),
             sender_msisdn=data.get('sender_msisdn')
             )
+        data['status'] = 'Accepted'
         api_response = crowdcoin_api.post(settings.CROWDCOIN_API_URL+'crowdcoin_payments/', data=data).json()
         logger.info(api_response)
         if not api_response.get('error') or not api_response.get('error_message'):

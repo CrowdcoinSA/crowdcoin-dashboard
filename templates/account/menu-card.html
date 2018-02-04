@@ -1,17 +1,16 @@
 
                             <a href="{% url 'money-transfer' %}">
                                 <div class="card card-stats">
-                                    <div class="card-header" data-background-color="green">
-                                        <i class="glyphicon glyphicon-user""></i>{{ merchant.default_pocket.tag }} <br/>
+                                    <div class="card-header" data-background-color="green">{{ merchant.default_pocket.tag }} 
                                     </div>
                                     <div class="card-content">
                                         <h3 class="title"></h3>
                                         <p class="category">
-                                            <strong class="text-success">{{ profile.default_pocket.balance }}</strong><br/><small>Available balance</small><br/> </p>
+                                            <strong class="text-success">CCs {{ profile.default_pocket.balance }} </strong><br/><small>Available Balance</small><br/> </p>
                                     </div>
                                     <div class="card-footer">
                                         <div class="stats">                                            
-                                            <a href="{% url 'account-add-funds' %}" class="menu-card-link"><p class="material-icons ">add_box</p>  Buy Crowdcoins</a>
+                                            <a href="{% url 'account-add-funds' %}" class="menu-card-link"><p class="material-icons ">add_box</p>  Buy CrowdCoins</a>
                                         </div>
                                         <br/>
                                         <div class="stats">
