@@ -16,114 +16,62 @@ demo = {
         });
     },
 
-    initFormExtendedDatetimepickers: function(){
-        $('.datetimepicker').datetimepicker({
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-screenshot',
-                clear: 'fa fa-trash',
-                close: 'fa fa-remove'
-            }
-         });
-    },
+    initChartist: function(){
 
-    initDocumentationCharts: function(){
-        /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
-        dataDailySalesChart = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            series: [
-                [12, 17, 7, 17, 23, 18, 38]
-            ]
-        };
-
-        optionsDailySalesChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-        }
-
-        var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-        md.startAnimationForLineChart(dailySalesChart);
-    },
-
-    initDashboardPageCharts: function(){
-
-        /* ----------==========     Daily Sales Chart initialization    ==========---------- */
-
-        dataDailySalesChart = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            series: [
-                [12, 17, 7, 17, 23, 18, 38]
-            ]
-        };
-
-        optionsDailySalesChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-        }
-
-        var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-        md.startAnimationForLineChart(dailySalesChart);
-
-
-
-        /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
-        dataCompletedTasksChart = {
-            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-            series: [
-                [230, 750, 450, 300, 280, 240, 200, 190]
-            ]
-        };
-
-        optionsCompletedTasksChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-        }
-
-        var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-        // start animation for the Completed Tasks Chart - Line Chart
-        md.startAnimationForLineChart(completedTasksChart);
-
-
-
-        /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-
-        var dataEmailsSubscriptionChart = {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        var dataSales = {
+          labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
           series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
+             [287, 385, 490, 562, 594, 626, 698, 895, 952],
+            [67, 152, 193, 240, 387, 435, 535, 642, 744],
+            [23, 113, 67, 108, 190, 239, 307, 410, 410]
           ]
         };
-        var optionsEmailsSubscriptionChart = {
+
+        var optionsSales = {
+          lineSmooth: false,
+          low: 0,
+          high: 1000,
+          showArea: true,
+          height: "245px",
+          axisX: {
+            showGrid: false,
+          },
+          lineSmooth: Chartist.Interpolation.simple({
+            divisor: 3
+          }),
+          showLine: true,
+          showPoint: false,
+        };
+
+        var responsiveSales = [
+          ['screen and (max-width: 640px)', {
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+
+        Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
+
+
+        var data = {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          series: [
+            [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
+            [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
+          ]
+        };
+
+        var options = {
+            seriesBarDistance: 10,
             axisX: {
                 showGrid: false
             },
-            low: 0,
-            high: 1000,
-            chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
+            height: "245px"
         };
+
         var responsiveOptions = [
           ['screen and (max-width: 640px)', {
             seriesBarDistance: 5,
@@ -134,11 +82,32 @@ demo = {
             }
           }]
         ];
-        var emailsSubscriptionChart = Chartist.Bar('#emailsSubscriptionChart', dataEmailsSubscriptionChart, optionsEmailsSubscriptionChart, responsiveOptions);
 
-        //start animation for the Emails Subscription Chart
-        md.startAnimationForBarChart(emailsSubscriptionChart);
+        Chartist.Line('#chartActivity', data, options, responsiveOptions);
 
+        var dataPreferences = {
+            series: [
+                [25, 30, 20, 25]
+            ]
+        };
+
+        var optionsPreferences = {
+            donut: true,
+            donutWidth: 40,
+            startAngle: 0,
+            total: 100,
+            showLabel: false,
+            axisX: {
+                showGrid: false
+            }
+        };
+
+        Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+
+        Chartist.Pie('#chartPreferences', {
+          labels: ['62%','32%','6%'],
+          series: [62, 32, 6]
+        });
     },
 
     initGoogleMaps: function(){
@@ -165,8 +134,8 @@ demo = {
     	color = Math.floor((Math.random() * 4) + 1);
 
     	$.notify({
-        	icon: "notifications",
-        	message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+        	icon: "ti-gift",
+        	message: "Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web developer."
 
         },{
             type: type[color],
@@ -176,8 +145,171 @@ demo = {
                 align: align
             }
         });
-	}
+	},
+    initDocumentationCharts: function(){
+    //     	init single simple line chart
+        var dataPerformance = {
+          labels: ['6pm','9pm','11pm', '2am', '4am', '8am', '2pm', '5pm', '8pm', '11pm', '4am'],
+          series: [
+            [1, 6, 8, 7, 4, 7, 8, 12, 16, 17, 14, 13]
+          ]
+        };
 
+        var optionsPerformance = {
+          showPoint: false,
+          lineSmooth: true,
+          height: "200px",
+          axisX: {
+            showGrid: false,
+            showLabel: true
+          },
+          axisY: {
+            offset: 40,
+          },
+          low: 0,
+          high: 16,
+          height: "250px"
+        };
 
+        Chartist.Line('#chartPerformance', dataPerformance, optionsPerformance);
+
+    //     init single line with points chart
+        var dataStock = {
+          labels: ['\'07','\'08','\'09', '\'10', '\'11', '\'12', '\'13', '\'14', '\'15'],
+          series: [
+            [22.20, 34.90, 42.28, 51.93, 62.21, 80.23, 62.21, 82.12, 102.50, 107.23]
+          ]
+        };
+
+        var optionsStock = {
+          lineSmooth: false,
+          height: "200px",
+          axisY: {
+            offset: 40,
+            labelInterpolationFnc: function(value) {
+                return '$' + value;
+              }
+
+          },
+          low: 10,
+          height: "250px",
+          high: 110,
+            classNames: {
+              point: 'ct-point ct-green',
+              line: 'ct-line ct-green'
+          }
+        };
+
+        Chartist.Line('#chartStock', dataStock, optionsStock);
+
+    //      init multiple lines chart
+        var dataSales = {
+          labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+          series: [
+             [287, 385, 490, 562, 594, 626, 698, 895, 952],
+            [67, 152, 193, 240, 387, 435, 535, 642, 744],
+            [23, 113, 67, 108, 190, 239, 307, 410, 410]
+          ]
+        };
+
+        var optionsSales = {
+          lineSmooth: false,
+          low: 0,
+          high: 1000,
+          showArea: true,
+          height: "245px",
+          axisX: {
+            showGrid: false,
+          },
+          lineSmooth: Chartist.Interpolation.simple({
+            divisor: 3
+          }),
+          showLine: true,
+          showPoint: false,
+        };
+
+        var responsiveSales = [
+          ['screen and (max-width: 640px)', {
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+
+        Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
+
+    //      pie chart
+        Chartist.Pie('#chartPreferences', {
+          labels: ['62%','32%','6%'],
+          series: [62, 32, 6]
+        });
+
+    //      bar chart
+        var dataViews = {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          series: [
+            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+          ]
+        };
+
+        var optionsViews = {
+          seriesBarDistance: 10,
+          classNames: {
+            bar: 'ct-bar'
+          },
+          axisX: {
+            showGrid: false,
+
+          },
+          height: "250px"
+
+        };
+
+        var responsiveOptionsViews = [
+          ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+
+        Chartist.Bar('#chartViews', dataViews, optionsViews, responsiveOptionsViews);
+
+    //     multiple bars chart
+        var data = {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          series: [
+            [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
+            [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
+          ]
+        };
+
+        var options = {
+            seriesBarDistance: 10,
+            axisX: {
+                showGrid: false
+            },
+            height: "245px"
+        };
+
+        var responsiveOptions = [
+          ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              }
+            }
+          }]
+        ];
+
+        Chartist.Line('#chartActivity', data, options, responsiveOptions);
+
+    }
 
 }
