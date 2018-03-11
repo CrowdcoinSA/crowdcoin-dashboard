@@ -114,13 +114,7 @@ WSGI_APPLICATION = 'crowdcoin_merchant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 import dj_database_url
-DATABASES = {'default': dj_database_url.config()}
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-if  CROWDCOIN_ENV != "PRODUCTION":
-    DATABASES['default']['NAME'] = os.environ.get('DB_NAME')
-    DATABASES['default']['USER'] = os.environ.get('DB_USER')
-    DATABASES['default']['PASSWORD'] = os.environ.get('DB_PASSWORD')
-    DATABASES['default']['HOST'] = os.environ.get('DB_HOST')
+DATABASES = {'default': dj_database_url.config(engine='django.db.backends.postgresql_psycopg2')}
 
 
 
